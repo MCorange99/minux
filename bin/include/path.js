@@ -1,3 +1,5 @@
+let mng
+
 
 class PathParser {
 
@@ -11,7 +13,6 @@ class PathParser {
 		let fullpath = []
 		
 		if (path[0] === "/") {
-			console.log("true")
 			fullpath = this.root.split("/")
 			path = path.substring(1)
 		} else {
@@ -70,6 +71,14 @@ class PathParser {
 			}
 		}
 		this.current = fullpath.join("/")
+	}
+
+	static getManager(){
+		return mng;
+	}
+
+	setManager(){
+		mng = this
 	}
 }
 

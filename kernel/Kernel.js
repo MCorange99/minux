@@ -9,6 +9,7 @@ module.exports = class Kernel {
 	constructor(){
 		this.pathManager = new PathParser(config.fs.rootDirectory, "/")
 		const Shell = require(this.pathManager.getRealPath("/bin") + "/" + config.boot.shell)
-		this.shell = new Shell()
+		this.shell = new Shell(this.pathManager)
+		this.pathManager.setManger()
 	}
 }

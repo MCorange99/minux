@@ -4,18 +4,15 @@ const readline = require('readline-sync');
 const fs = require('fs');//.promises
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const Kernel = require("#kernel/Kernel.js")
-
+const { NodeVM } = require("vm2")
 
 module.exports = class System {
-	/**
-     * @param {Kernel} kernel 
-     */
-	constructor(kernel){
-		this.kernel = kernel
-		console.log(kernel)
+
+	constructor(pathManager){
+		this.pathManager = pathManager
 	}
-	openFile(filePath, text, mode='w'){
+
+	static openFile(filePath, text, mode='w'){
 		//fs.open(filePath, 'w');
 		if (mode == 'c'){
 			try {
@@ -37,27 +34,36 @@ module.exports = class System {
 	
 	}
 	
-	input(q){
+	static input(q){
 		return readline.question(q);
 	}
 	
-	exit(code){
+	static exit(code){
 		process.exit(code);
 	}
 	
-	runCmd(cmd) {
+	runCmd(cmd, args) {
+		// console.log(cmd + "\n" + args)
 		// const vm = new NodeVM({
 		// 	require: {
 		// 		external: true,
-		// 		root: 
+		// 		root: this.pathManager.root,
+		// 		sandbox: this.pathManager,
+		// 		require: {
+		// 			external: true,
+		// 			builtin: ["*"]
+		// 		}
 		// 	}
 		// });
-	
-		// vm.run();
-		console.log(this.shell.kernel.pathManager.current)
+		
+		const file = fs.readFileSync(this.pathManager.getRealPath(cmd) + ".js", {encoding: "utf-8", flag: "r"});
+		let str = `${file}\n\n Program.Run("${cmd}", {pathManager: this.pathManager}`
+		
+		for (const i in args){
+			str += `,"${args[i]}"`
+		}
+		str += ");"
+		// vm.run(str);
+		eval(str)
 	}
 }
-
-
-
-// console.log(input("hey"))

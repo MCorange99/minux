@@ -1,35 +1,30 @@
-const System = require('#include/System.js');
-const Kernel = require("#kernel/Kernel.js")
-const system = new System()
-//TODO: add support for typescript
+const System = require('#include/system.js');
 
+//TODO: add support for typescript
 module.exports = class Mash {
-	// /**
-    //  * The kernel of the fake os
-    //  * @param {Kernel} kernel 
-    //  */
-	constructor(){
-		this.kernel = Kernel
-		this.shell = this.init()
+	constructor(pathManager){
 		this.exit = false
 		this.user = "MCorange"
+		this.pathManager = pathManager
+		this.shell = this.init()
 	}
-
 	loop(){
-		let inp = system.input(">");
+		const system = new System(this.pathManager)
+		let inp = System.input(`${this.user}@local$`);
 		if (inp == "exit" || inp == "quit") {
-			this.exit = true
+			exit = true
 			return
 		}
+		if (inp == "") return
 		let inpa = inp.split(" ")
 		const execName = inpa[0]
-		inp.shift()
+		inpa.shift()
 		const args = inpa;
 		system.runCmd(execName, args)
 	
 	}
+	
 	init(){
-		console.log("Started mash")
 		while(true) {
 			this.loop()
 			if (this.exit) {
@@ -40,4 +35,3 @@ module.exports = class Mash {
 	}
 	
 }
-
