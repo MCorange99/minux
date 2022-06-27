@@ -1,0 +1,8 @@
+{
+	"boot": {
+		"shell": "mash"
+	},
+	"fs": {
+		"rootDirectory": "/home/mcorange/coding/tsoding/minux/v1"
+	}
+}

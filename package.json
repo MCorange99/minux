@@ -1,0 +1,25 @@
+{
+  "name": "minux",
+  "version": "0.0.1",
+  "description": "fake os",
+  "main": "start.js",
+  "author": "MCorange",
+  "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "test": "echo no tests implemented"
+  },
+  "imports": {
+    "#root/*": "./*",
+    "#include/*": "./bin/include/*",
+    "#bin/*": "./bin/*",
+    "#kernel/*": "./kernel/*",
+    "#etc/*": "./etc/*"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0"
+  },
+  "dependencies": {
+    "vm2": "^3.9.9"
+  }
+}
