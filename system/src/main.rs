@@ -4,7 +4,11 @@
 
 fn main() {
 
-utils::rm_dir_contents("./");
+println("Starting MinuxOS");
+//start fs
+//clear /tmp
+//prompt user for login
+//start shell(default: mash) with session(idk dont wanna pass the crds to user)
 
 }
 
