@@ -1,14 +1,29 @@
-let mng
 
-
-class PathParser {
-
+class PathManager {
+	/**
+	 * Path Manager for minux
+	 * @param {string} rootPath - The real root path of the filesystem
+	 * @param {string} currentPath - the current path of the fake system
+	 * @param {boolean} protectedMode - Protected mode disallows escaping the fake filesystem
+	 */
 	constructor(rootPath, currentPath = "/", protectedMode = true){
+		this.kernelModules = null
 		this.root = rootPath
 		this.current = currentPath
 		this.protected = protectedMode
 	}
-
+	/**
+	 * Initialise the Path manager with the other essential kernel modules.
+	 * @param {object} kernelModules - The essential modules of the kernel for minux. 
+	 */
+	init(kernelModules){
+		this.kernelModules = kernelModules
+	}
+	/**
+	 * Gets the real path of the fake path.
+	 * @param {String} path - The path to get the real path of the fake filesystem. 
+	 * @returns 
+	 */
 	getRealPath(path){
 		let fullpath = []
 		
@@ -45,7 +60,10 @@ class PathParser {
 	// set root(value) {
     //     throw new Error('root is immutable.');
     // }
-
+	/**
+	 * Sets the path in the fake filesystem
+	 * @param {String} path - The new path
+	 */
 	setPath(path){
 		let fullpath = []
 		
@@ -72,16 +90,8 @@ class PathParser {
 		}
 		this.current = fullpath.join("/")
 	}
-
-	static getManager(){
-		return mng;
-	}
-
-	setManager(){
-		mng = this
-	}
 }
 
 module.exports = {
-	PathParser
+	PathManager
 }

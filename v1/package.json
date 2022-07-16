@@ -12,6 +12,7 @@
   "imports": {
     "#root/*": "./*",
     "#include/*": "./bin/include/*",
+    "#system/*": "./bin/system/*",
     "#bin/*": "./bin/*",
     "#kernel/*": "./kernel/*",
     "#etc/*": "./etc/*"
@@ -20,6 +21,6 @@
     "eslint": "^8.9.0"
   },
   "dependencies": {
-    "vm2": "^3.9.9"
+    "readline-sync": "^1.4.10"
   }
 }
