@@ -1,9 +1,0 @@
-{
-	"boot": {
-		"shell": "mash"
-	},
-	"fs": {
-		"rootDirectory": "/home/mcorange/@Projects/javascript/minux",
-		"rootDirectoryOldpc": "/home/mcorange/coding/tsoding/minux/v1"
-	}
-}
